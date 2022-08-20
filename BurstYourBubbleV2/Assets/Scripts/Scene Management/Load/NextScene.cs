@@ -21,6 +21,7 @@ public class NextScene : MonoBehaviour
                 await Task.Delay(2000);
                 bus.Stop();
                 kids.Stop();
+                PlayerPrefs.SetString("GameState","School Hallway");
                 SceneManager.LoadScene("School Hallway", LoadSceneMode.Single);
                 break;
             case "":

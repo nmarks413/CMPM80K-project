@@ -24,29 +24,32 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if(PlayerPrefs.GetString("gameState") == "Awake")
         {
-            UpdatePosition(Vector2.up);
-            horiz = false;
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            UpdatePosition(Vector2.left);
-            horiz = true;
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            UpdatePosition(Vector2.down);
-            horiz = false;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            UpdatePosition(Vector2.right);
-            horiz = true;
-        }
-        else
-        {
-            UpdatePosition(Vector2.zero);
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                UpdatePosition(Vector2.up);
+                horiz = false;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                UpdatePosition(Vector2.left);
+                horiz = true;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                UpdatePosition(Vector2.down);
+                horiz = false;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                UpdatePosition(Vector2.right);
+                horiz = true;
+            }
+            else
+            {
+                UpdatePosition(Vector2.zero);
+            }
         }
     }
     private void UpdatePosition(Vector2 direction)
