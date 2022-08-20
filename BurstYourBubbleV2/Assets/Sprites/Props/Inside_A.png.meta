@@ -2182,7 +2182,7 @@ TextureImporter:
         width: 7
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2190,6 +2190,27 @@ TextureImporter:
       bones: []
       spriteID: bc59ff2cb76b0c04290ab003d67b9a63
       internalID: 853744979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bed_blanket
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 209
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff49eb95835d504e985e23d35481193
+      internalID: -1362942
       vertices: []
       indices: 
       edges: []
@@ -2215,6 +2236,7 @@ TextureImporter:
       White_Trashcan: -255620094
       Chalk_Board: -2011272683
       4Pane_Window_Yellow: -646594049
+      bed_blanket: -1362942
       8Pane_Yellow_Window: -1179286363
       Pin_Board: 1631171325
       Drawer_Three: 742116114

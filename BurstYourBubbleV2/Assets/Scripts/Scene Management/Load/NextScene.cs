@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
+    private void Start()
+    {
+        PlayerPrefs.SetString("gameState", "Asleep");
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(SceneManager.GetActiveScene().name == "Bedroom")
+        if(PlayerPrefs.GetString("gameState") == "Asleep")
         {
+            PlayerPrefs.SetString("gameState", "School");
             SceneManager.LoadScene("School Hallway", LoadSceneMode.Single);
         }
     }
