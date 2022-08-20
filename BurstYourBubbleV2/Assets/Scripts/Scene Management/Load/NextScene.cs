@@ -9,23 +9,26 @@ public class NextScene : MonoBehaviour
     
     private async void OnCollisionEnter2D(Collision2D collision)
     {
-        switch(PlayerPrefs.GetString("GameState"))
+        
+        switch(PlayerPrefs.GetString("gameState"))
         {
             case "Awake":
-                AudioSource bus = Resources.Load<AudioSource>("Audio/bus.wav");
-                AudioSource kids = Resources.Load<AudioSource>("Audio/kids.wav");
-                bus.volume = .5f;
-                kids.volume = .5f;
-                bus.Play();
-                kids.Play();
-                await Task.Delay(2000);
-                bus.Stop();
-                kids.Stop();
+                //DontDestroyOnLoad(this.transform.parent.gameObject);
+                StartCoroutine(wait("Transition","School Hallway",4f));
                 PlayerPrefs.SetString("GameState","School Hallway");
-                SceneManager.LoadScene("School Hallway", LoadSceneMode.Single);
                 break;
             case "":
                 break;
         }
     }
+    IEnumerator wait(string s1,string s2,float t)
+    {
+        SceneManager.LoadScene(s1, LoadSceneMode.Additive);
+        yield return new WaitForSeconds(t);
+        SceneManager.LoadScene(s2,LoadSceneMode.Single);
+    }
+    
+    
+
+    
 }
