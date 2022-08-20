@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
     {
         animationIndex = 0;
         frameIndex = 0;
-        horiz = false;
+        horiz = true;
     }
 
     private void FixedUpdate()
