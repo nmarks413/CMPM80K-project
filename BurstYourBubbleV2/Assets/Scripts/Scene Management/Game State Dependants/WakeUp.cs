@@ -12,8 +12,14 @@ public class WakeUp : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Space) && PlayerPrefs.GetString("gameState") == "Asleep")
+        {
+            PlayerPrefs.SetString("gameState", "Awake");
+            GameObject.Find("Player").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Player/idle_right");
+            GameObject.Find("Player").transform.position += Vector3.right;
+            GameObject.Find("Bed").GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
 }
