@@ -16,10 +16,12 @@ public class WakeUp : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) && PlayerPrefs.GetString("gameState") == "Asleep")
         {
-            PlayerPrefs.SetString("gameState", "Awake");
             GameObject.Find("Player").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Player/idle_right");
             GameObject.Find("Player").transform.position += Vector3.right;
             GameObject.Find("Bed").GetComponent<BoxCollider2D>().enabled = true;
+            GameObject.Find("bed_blanket").SetActive(false);
+
+            PlayerPrefs.SetString("gameState", "Awake");
         }
     }
 }
