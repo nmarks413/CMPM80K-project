@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 18
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -2161,7 +2161,7 @@ TextureImporter:
         width: 30
         height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2169,6 +2169,27 @@ TextureImporter:
       bones: []
       spriteID: 470f502ef210f754a961ea316019bbd5
       internalID: -435868457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chair_head
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 147
+        width: 7
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc59ff2cb76b0c04290ab003d67b9a63
+      internalID: 853744979
       vertices: []
       indices: 
       edges: []
@@ -2220,6 +2241,7 @@ TextureImporter:
       Book_Purple_Open: -2106732411
       Green_Recycling: -1801743433
       Tree_Plant: -2131829296
+      chair_head: 853744979
       0000_Clock: -468551406
       Fireplace_Yellow: 227822707
       Daisy_Flower: 1982711336
