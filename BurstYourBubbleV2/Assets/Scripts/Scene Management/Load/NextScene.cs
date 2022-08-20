@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
-    private void Start()
-    {
-        PlayerPrefs.SetString("gameState", "Asleep");
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(PlayerPrefs.GetString("gameState") == "Asleep")
