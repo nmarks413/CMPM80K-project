@@ -19,7 +19,7 @@ public class OnTransitionLoad : MonoBehaviour
                 kids.volume = 0.5f;
                 bus.Play();
                 kids.Play();
-                StartCoroutine(Coroutine(new AudioSource[] { bus,kids}, 2.5f));
+                StartCoroutine(Coroutine(new AudioSource[] { bus,kids}, 4f));
                 break;
         }
     }

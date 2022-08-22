@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class NextScene : MonoBehaviour
 {
     
-    private async void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         
         switch(PlayerPrefs.GetString("gameState"))
