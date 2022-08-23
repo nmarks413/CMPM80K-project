@@ -7,12 +7,16 @@ public class Talk : MonoBehaviour
     [Range(0, 5)]
     public float distanceUntilActivated;
 
+    private List<int> generatedNumbers;
+
     private void Start()
     {
         for(int i = 0; i < GetComponentsInChildren<SpriteRenderer>().Length+1; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
+
+        generatedNumbers = new List<int>();
     }
 
     // Update is called once per frame
@@ -25,20 +29,42 @@ public class Talk : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     transform.GetChild(i).gameObject.SetActive(true);
+
+                    int randomNumber = Random.Range(0, 10);
+
+                    while(generatedNumbers.Contains(randomNumber))
+                    {
+                        randomNumber = Random.Range(0, 10);
+                    }
+
+                    generatedNumbers.Add(randomNumber);
+
+                    GameObject dialogueOption = new GameObject();
+                    dialogueOption.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Dialogue/Speech Icons/"+ randomNumber.ToString());
+
+                    dialogueOption.transform.SetParent(transform.GetChild(i));
+                    dialogueOption.transform.position = dialogueOption.transform.parent.position + Vector3.back + 0.17f*Vector3.up;
+
                 }
             }
 
             if(Input.GetKey(KeyCode.Alpha1))
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+                transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.white;
+                transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.white;
             }
             else if(Input.GetKey(KeyCode.Alpha2))
             {
                 transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.green;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.white;
             }
             else if(Input.GetKey(KeyCode.Alpha3))
             {
                 transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.green;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
     }
