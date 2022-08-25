@@ -23,6 +23,7 @@ public class Trash : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 transform.position = GameObject.Find("trashAway").transform.position;
+                trashTutorial.SetActive(false);
             }
         }
     }
