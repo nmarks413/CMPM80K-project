@@ -9,6 +9,7 @@ public class NextScene : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(PlayerPrefs.GetString("gameState"));
         
         switch(PlayerPrefs.GetString("gameState"))
         {
