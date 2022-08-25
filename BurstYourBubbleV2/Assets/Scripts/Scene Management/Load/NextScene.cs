@@ -13,13 +13,13 @@ public class NextScene : MonoBehaviour
         switch(PlayerPrefs.GetString("gameState"))
         {
             case "Awake":
-                //DontDestroyOnLoad(this.transform.parent.gameObject);
                 StartCoroutine(wait("Transition","School Hallway",4f));
-                PlayerPrefs.SetString("GameState","School Hallway");
+                PlayerPrefs.SetString("gameState","School Hallway");
                 break;
             case "School Hallway":
-                StartCoroutine(wait("Transition","Classroom",4f));
-                PlayerPrefs.SetString("GameState","Classroom");
+                Debug.Log("test");
+                StartCoroutine(wait("Transition","Classroom",1f));
+                PlayerPrefs.SetString("gameState","Classroom");
                 break;
             case "Classroom":
                 break;
