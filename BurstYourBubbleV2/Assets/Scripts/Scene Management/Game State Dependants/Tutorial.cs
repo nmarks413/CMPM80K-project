@@ -9,8 +9,6 @@ public class Tutorial : MonoBehaviour
 
     private void Start()
     {
-        GameObject.Find("SpaceTutorial").SetActive(true);
-
         arrowTutorial = GameObject.Find("ArrowTutorial");
         arrowTutorial.SetActive(false);
     }
