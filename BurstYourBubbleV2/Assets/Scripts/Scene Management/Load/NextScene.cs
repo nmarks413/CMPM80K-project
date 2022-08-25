@@ -17,7 +17,11 @@ public class NextScene : MonoBehaviour
                 StartCoroutine(wait("Transition","School Hallway",4f));
                 PlayerPrefs.SetString("GameState","School Hallway");
                 break;
-            case "":
+            case "School Hallway":
+                StartCoroutine(wait("Transition","Classroom",4f));
+                PlayerPrefs.SetString("GameState","Classroom");
+                break;
+            case "Classroom":
                 break;
         }
     }
