@@ -2203,7 +2203,7 @@ TextureImporter:
         width: 44
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2211,6 +2211,27 @@ TextureImporter:
       bones: []
       spriteID: aff49eb95835d504e985e23d35481193
       internalID: -1362942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: statue
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 334
+        width: 59
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29ec5e4a641c291408b263fa9c828045
+      internalID: 558789957
       vertices: []
       indices: 
       edges: []
@@ -2303,6 +2324,7 @@ TextureImporter:
       Fire_Hydrant: 1509561234
       Candle_Shadedv1: -729554800
       Book_Purple_Closed: -160373733
+      statue: 558789957
       Hung_Dress: -1843312335
       Night_Stand: 1849714502
       Glass_Book_DeskPart: -674785732
