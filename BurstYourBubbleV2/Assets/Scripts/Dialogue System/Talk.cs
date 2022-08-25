@@ -10,6 +10,7 @@ public class Talk : MonoBehaviour
     private List<int> generatedNumbers;
 
     private bool dialogueCreated;
+    private bool chosen;
 
     private void Start()
     {
@@ -20,10 +21,11 @@ public class Talk : MonoBehaviour
 
         generatedNumbers = new List<int>();
         dialogueCreated = false;
+        chosen = false;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (distanceUntilActivated >= Vector2.Distance(new Vector3(transform.position.x, transform.position.y), new Vector2(GameObject.Find("Player").transform.position.x, GameObject.Find("Player").transform.position.y)))
         {
@@ -45,6 +47,7 @@ public class Talk : MonoBehaviour
                         }
 
                         generatedNumbers.Add(randomNumber);
+                        chosen = false;
                     }
                     else
                     {
@@ -66,18 +69,30 @@ public class Talk : MonoBehaviour
                 transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
                 transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.white;
                 transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.white;
+                chosen = true;
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {
                 transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.green;
                 transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
                 transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.white;
+                chosen = true;
             }
             else if (Input.GetKey(KeyCode.Alpha3))
             {
                 transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.green;
                 transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
                 transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.white;
+                chosen = true;
+            }
+            if(Input.GetKeyDown(KeyCode.Space) && chosen)
+            {
+                for (int i = 0; i < GetComponentsInChildren<SpriteRenderer>().Length + 1; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+
+                PlayerPrefs.SetInt("Confidence", PlayerPrefs.GetInt("Confidence") - 1);
             }
         }
         else

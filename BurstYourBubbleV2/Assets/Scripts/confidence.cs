@@ -18,8 +18,8 @@ public class confidence : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         conf = PlayerPrefs.GetInt("Confidence");
+
         bar.fillAmount = (float)conf / (float)MaxConf;
     }
 }
