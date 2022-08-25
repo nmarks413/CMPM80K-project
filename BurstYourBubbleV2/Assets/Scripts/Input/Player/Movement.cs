@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(PlayerPrefs.GetString("gameState") == "Awake")
+        if(PlayerPrefs.GetString("gameState") != "Asleep")
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {

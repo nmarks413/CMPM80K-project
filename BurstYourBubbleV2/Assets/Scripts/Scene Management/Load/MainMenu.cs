@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
     void StartGame()
     {
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("Confidence",10);
+        PlayerPrefs.SetInt("Confidence", 20);
         SceneManager.LoadScene("Bedroom", LoadSceneMode.Single);
     }
     void openOptions()

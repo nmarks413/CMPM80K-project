@@ -21,6 +21,8 @@ public class OnTransitionLoad : MonoBehaviour
                 kids.Play();
                 StartCoroutine(Coroutine(new AudioSource[] { bus,kids}, 4f));
                 break;
+            case "School Hallway":
+                break;
         }
     }
     IEnumerator Coroutine(AudioSource[] asource,float t)

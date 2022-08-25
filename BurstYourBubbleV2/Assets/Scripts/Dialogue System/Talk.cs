@@ -9,83 +9,134 @@ public class Talk : MonoBehaviour
 
     private List<int> generatedNumbers;
 
-    private bool dialogueCreated;
+    private float color;
 
+    private bool dialogueCreated;
+    private bool chosen;
+    private bool confirm;
     private void Start()
     {
-        for (int i = 0; i < GetComponentsInChildren<SpriteRenderer>().Length + 1; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
+        DisableBubbles();
 
         generatedNumbers = new List<int>();
+
         dialogueCreated = false;
+        chosen = false;
+        confirm = false;
+
+        //Debug
+        PlayerPrefs.SetInt("Confidence", 20);
+        PlayerPrefs.SetInt("maxConfidence", 20);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (distanceUntilActivated >= Vector2.Distance(new Vector3(transform.position.x, transform.position.y), new Vector2(GameObject.Find("Player").transform.position.x, GameObject.Find("Player").transform.position.y)))
+        if (activatedByPlayer() && !confirm)
         {
             if (!transform.GetChild(0).gameObject.activeSelf)
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    transform.GetChild(i).gameObject.SetActive(true);
-
-                    int randomNumber;
-
-                    if (!dialogueCreated)
-                    {
-                        randomNumber = Random.Range(0, 10);
-
-                        while (generatedNumbers.Contains(randomNumber))
-                        {
-                            randomNumber = Random.Range(0, 10);
-                        }
-
-                        generatedNumbers.Add(randomNumber);
-                    }
-                    else
-                    {
-                        randomNumber = generatedNumbers[i];
-                    }
-                    GameObject dialogueOption = new GameObject();
-                    dialogueOption.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Dialogue/Speech Icons/" + randomNumber.ToString());
-
-                    dialogueOption.transform.SetParent(transform.GetChild(i));
-                    dialogueOption.transform.position = dialogueOption.transform.parent.position + Vector3.back + 0.2f * Vector3.up;
-
-                }
-
+                SpawnBubbles();
                 dialogueCreated = true;
             }
 
             if (Input.GetKey(KeyCode.Alpha1))
             {
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
-                transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.white;
-                transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.white;
+                SelectBubble(0);
+                chosen = true;
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {
-                transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.green;
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
-                transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.white;
+                SelectBubble(1);
+                chosen = true;
             }
             else if (Input.GetKey(KeyCode.Alpha3))
             {
-                transform.GetChild(2).GetComponent<SpriteRenderer>().color = Color.green;
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
-                transform.GetChild(1).GetComponent<SpriteRenderer>().color = Color.white;
+                SelectBubble(2);
+                chosen = true;
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && chosen)
+            {
+                DisableBubbles();
+                confirm = true;
+
+                ChangeConfidence(1, 1);
+                makeFriend();
             }
         }
         else
         {
-            for (int i = 0; i < GetComponentsInChildren<SpriteRenderer>().Length + 1; i++)
+            DisableBubbles();
+        }
+    }
+
+    private bool activatedByPlayer()
+    {
+        if (distanceUntilActivated >= Vector2.Distance(new Vector3(transform.position.x, transform.position.y), new Vector2(GameObject.Find("Player").transform.position.x, GameObject.Find("Player").transform.position.y)))
+            return true;
+        else
+            return false;
+    }
+    private void SelectBubble(int bubbleIndex)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            if (bubbleIndex == i)
+                transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.green;
+            else
+                transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+    private void SpawnBubbles()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+
+            transform.GetChild(i).gameObject.SetActive(true);
+
+            if (dialogueCreated)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
+                PopulateBubbles(generatedNumbers[i], i);
+            }
+            else
+            {
+                PopulateBubbles(GenerateRandom(), i);
             }
         }
+    }
+    private void PopulateBubbles(int randomNumber, int i)
+    {
+        GameObject dialogueOption = new GameObject();
+        dialogueOption.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Dialogue/Speech Icons/" + randomNumber.ToString());
+
+        dialogueOption.transform.SetParent(transform.GetChild(i));
+        dialogueOption.transform.position = dialogueOption.transform.parent.position + Vector3.back + 0.2f * Vector3.up;
+    }
+    private int GenerateRandom()
+    {
+        int randomNumber = Random.Range(0, 10);
+
+        while (generatedNumbers.Contains(randomNumber))
+        {
+            randomNumber = Random.Range(0, 10);
+        }
+
+        return randomNumber;
+    }
+    private void DisableBubbles()
+    {
+        for (int i = 0; i < GetComponentsInChildren<SpriteRenderer>().Length + 1; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+    private void ChangeConfidence(int maxUp, int currentDown)
+    {
+        PlayerPrefs.SetInt("Confidence", PlayerPrefs.GetInt("Confidence") - currentDown);
+        PlayerPrefs.SetInt("maxConfidence", PlayerPrefs.GetInt("maxConfidence") + maxUp);
+    }
+    private void makeFriend()
+    {
+        GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color - new Color(0.25f, 0, 0.25f, 0);
     }
 }

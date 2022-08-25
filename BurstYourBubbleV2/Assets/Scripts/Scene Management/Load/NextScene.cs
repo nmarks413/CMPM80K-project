@@ -9,15 +9,38 @@ public class NextScene : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        Debug.Log(gameObject.name);
         
         switch(PlayerPrefs.GetString("gameState"))
         {
             case "Awake":
-                //DontDestroyOnLoad(this.transform.parent.gameObject);
                 StartCoroutine(wait("Transition","School Hallway",4f));
-                PlayerPrefs.SetString("GameState","School Hallway");
+                PlayerPrefs.SetString("gameState","School Hallway");
                 break;
-            case "":
+            case "School Hallway":
+                if (gameObject.name == "Door")
+                {
+                    StartCoroutine(wait("Transition", "Classroom", 1f));
+                    PlayerPrefs.SetString("gameState", "Classroom");
+                }
+                break;
+            case "Classroom":
+                StartCoroutine(wait("Transition","School Hallway",1f));
+                PlayerPrefs.SetString("gameState", "School Hallway2");
+                break;
+            case "School Hallway2":
+                if(gameObject.name == "maroon_double")
+                StartCoroutine(wait("Transition", "Lunch", 1f));
+                PlayerPrefs.SetString("gameState", "Lunch");
+                break;
+            case "Lunch":
+                StartCoroutine(wait("Transition", "School Hallway", 1f));
+                PlayerPrefs.SetString("gameState", "School Hallway3");
+                break;
+            case "School Hallway3":
+                StartCoroutine(wait("Transition", "Bedroom", 1f));
+                PlayerPrefs.SetString("gameState", "Home");
                 break;
         }
     }
