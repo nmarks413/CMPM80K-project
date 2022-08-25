@@ -9,7 +9,8 @@ public class NextScene : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(PlayerPrefs.GetString("gameState"));
+
+        Debug.Log(gameObject.name);
         
         switch(PlayerPrefs.GetString("gameState"))
         {
@@ -18,11 +19,28 @@ public class NextScene : MonoBehaviour
                 PlayerPrefs.SetString("gameState","School Hallway");
                 break;
             case "School Hallway":
-                Debug.Log("test");
-                StartCoroutine(wait("Transition","Classroom",1f));
-                PlayerPrefs.SetString("gameState","Classroom");
+                if (gameObject.name == "Door")
+                {
+                    StartCoroutine(wait("Transition", "Classroom", 1f));
+                    PlayerPrefs.SetString("gameState", "Classroom");
+                }
                 break;
             case "Classroom":
+                StartCoroutine(wait("Transition","School Hallway",1f));
+                PlayerPrefs.SetString("gameState", "School Hallway2");
+                break;
+            case "School Hallway2":
+                if(gameObject.name == "maroon_double")
+                StartCoroutine(wait("Transition", "Lunch", 1f));
+                PlayerPrefs.SetString("gameState", "Lunch");
+                break;
+            case "Lunch":
+                StartCoroutine(wait("Transition", "School Hallway", 1f));
+                PlayerPrefs.SetString("gameState", "School Hallway3");
+                break;
+            case "School Hallway3":
+                StartCoroutine(wait("Transition", "Bedroom", 1f));
+                PlayerPrefs.SetString("gameState", "Home");
                 break;
         }
     }
