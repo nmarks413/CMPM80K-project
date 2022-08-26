@@ -8,15 +8,20 @@ public class Diary : MonoBehaviour
     public float activationRange;
 
     private GameObject diaryCanvas;
+    private GameObject spaceTutorialDiary;
 
     private bool isActivated;
+    private bool instant;
 
     // Start is called before the first frame update
     void Start()
     {
         diaryCanvas = GameObject.Find("Diary Canvas");
+        spaceTutorialDiary = GameObject.Find("Diary Space");
+        spaceTutorialDiary.SetActive(false);
         diaryCanvas.SetActive(false);
         isActivated = false;
+        instant = true;
     }
 
     // Update is called once per frame
@@ -24,14 +29,22 @@ public class Diary : MonoBehaviour
     {
         if (activationRange >= Vector2.Distance(new Vector3(transform.position.x, transform.position.y), new Vector2(GameObject.Find("Player").transform.position.x, GameObject.Find("Player").transform.position.y)))
         {
+            if(instant)
+            {
+                spaceTutorialDiary.SetActive(true);
+                instant = false;
+            }
+            
             if (Input.GetKeyDown(KeyCode.Space) && !isActivated)
             {
                 diaryCanvas.SetActive(true);
                 isActivated = true;
+                spaceTutorialDiary.SetActive(false);
             }
             else if(Input.GetKeyDown(KeyCode.Space) && isActivated)
             {
                 diaryCanvas.SetActive(false);
+                spaceTutorialDiary.SetActive(false);
             }
         }
     }
