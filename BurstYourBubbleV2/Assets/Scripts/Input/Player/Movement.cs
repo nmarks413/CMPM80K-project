@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(PlayerPrefs.GetString("gameState") != "Asleep")
+        if(PlayerPrefs.GetString("gameState") != "Asleep" && PlayerPrefs.GetString("gameState") != "Classroom2")
         {
            audiosource.clip = Resources.Load<AudioClip>("Audio/Player/Movement/Walk_On_Wood");
             audiosource.volume = 1;

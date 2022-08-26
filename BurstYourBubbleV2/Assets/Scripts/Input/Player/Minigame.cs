@@ -13,6 +13,9 @@ public class Minigame : MonoBehaviour
     int correctAnswer;
     bool chosen;
     bool inSeat;
+
+    bool outOfSeat;
+
     string chosenAns;
 
     int MaxTime = 900;
@@ -20,9 +23,7 @@ public class Minigame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("Confidence", 20);
         PlayerPrefs.SetInt("TestOver", 0);
-        PlayerPrefs.SetString("gameState", "Classroom");
         operations = new char[] { '+', '-', '*' };
         timer = 0;
         inSeat = false;
@@ -40,6 +41,9 @@ public class Minigame : MonoBehaviour
         {
             //Debug.Log("test");
             inSeat = true;
+            GameObject.Find("Player").transform.position = new Vector3(GameObject.Find("Player_chair").transform.position.x, GameObject.Find("Player_chair").transform.position.y, 3.5f);
+            PlayerPrefs.SetString("gameState", "Classroom2");
+            outOfSeat = false;
             EnableBubbles();
             SpawnBubbles();
         }
@@ -105,6 +109,12 @@ public class Minigame : MonoBehaviour
         {
             PlayerPrefs.SetInt("TestOver", 1);
             DisableBubbles();
+            PlayerPrefs.SetString("gameState", "Classroom");
+            if(!outOfSeat)
+            {
+                GameObject.Find("Player").transform.position += new Vector3(1, 0, -8.5f);
+                outOfSeat = true;
+            }
         }
     }
 
