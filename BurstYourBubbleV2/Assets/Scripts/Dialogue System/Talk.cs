@@ -26,10 +26,6 @@ public class Talk : MonoBehaviour
         confirm = false;
 
         GetComponent<SpriteRenderer>().color = new Color(PlayerPrefs.GetFloat("Red" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.r), PlayerPrefs.GetFloat("Green" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.g), PlayerPrefs.GetFloat("Blue" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.b));
-
-        //Debug
-        PlayerPrefs.SetInt("Confidence", 20);
-        PlayerPrefs.SetInt("maxConfidence", 20);
     }
 
     // Update is called once per frame
