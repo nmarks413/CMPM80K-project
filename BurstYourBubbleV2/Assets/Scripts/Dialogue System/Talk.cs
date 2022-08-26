@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Talk : MonoBehaviour
 {
@@ -24,9 +25,7 @@ public class Talk : MonoBehaviour
         chosen = false;
         confirm = false;
 
-        //Debug
-        PlayerPrefs.SetInt("Confidence", 20);
-        PlayerPrefs.SetInt("maxConfidence", 20);
+        GetComponent<SpriteRenderer>().color = new Color(PlayerPrefs.GetFloat("Red" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.r), PlayerPrefs.GetFloat("Green" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.g), PlayerPrefs.GetFloat("Blue" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.b));
     }
 
     // Update is called once per frame
@@ -121,6 +120,8 @@ public class Talk : MonoBehaviour
             randomNumber = Random.Range(0, 10);
         }
 
+        generatedNumbers.Add(randomNumber);
+
         return randomNumber;
     }
     private void DisableBubbles()
@@ -138,5 +139,9 @@ public class Talk : MonoBehaviour
     private void makeFriend()
     {
         GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color - new Color(0.25f, 0, 0.25f, 0);
+
+        PlayerPrefs.SetFloat("Red" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.r);
+        PlayerPrefs.SetFloat("Green" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.g);
+        PlayerPrefs.SetFloat("Blue" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.b);
     }
 }
