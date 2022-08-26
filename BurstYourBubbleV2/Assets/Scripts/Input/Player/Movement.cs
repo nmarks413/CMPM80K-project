@@ -15,39 +15,49 @@ public class Movement : MonoBehaviour
 
     private bool horiz;
 
+    private AudioSource audiosource;
     private void Start()
     {
         animationIndex = 0;
         frameIndex = 0;
         horiz = true;
+        audiosource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
     {
         if(PlayerPrefs.GetString("gameState") != "Asleep")
         {
+           audiosource.clip = Resources.Load<AudioClip>("Audio/Player/Movement/Walk_On_Wood");
+            audiosource.volume = 1;
             if (Input.GetKey(KeyCode.UpArrow))
             {
+                if (!audiosource.isPlaying) { audiosource.Play(); }
+                    
                 UpdatePosition(Vector2.up);
                 horiz = false;
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
+                if (!audiosource.isPlaying) { audiosource.Play(); }
                 UpdatePosition(Vector2.left);
                 horiz = true;
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
+                if (!audiosource.isPlaying) { audiosource.Play(); }
                 UpdatePosition(Vector2.down);
                 horiz = false;
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
+                if (!audiosource.isPlaying) { audiosource.Play(); }
                 UpdatePosition(Vector2.right);
                 horiz = true;
             }
             else
             {
+                audiosource.Stop();
                 UpdatePosition(Vector2.zero);
             }
         }
