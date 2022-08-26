@@ -15,6 +15,8 @@ public class Talk : MonoBehaviour
     private bool dialogueCreated;
     private bool chosen;
     private bool confirm;
+
+    public char chosenDir;
     private void Start()
     {
         DisableBubbles();
@@ -59,8 +61,43 @@ public class Talk : MonoBehaviour
                 DisableBubbles();
                 confirm = true;
 
-                ChangeConfidence(1, 1);
-                makeFriend();
+                switch (chosenDir)
+                {
+                    case '0':
+                        ChangeConfidence(1, 1);
+                        break;
+                    case '1':
+                        ChangeConfidence(1, 1);
+                        break;
+                    case '2':
+                        ChangeConfidence(3, 2);
+                        break;
+                    case '3':
+                        ChangeConfidence(15, 3);
+                        break;
+                    case '4':
+                        ChangeConfidence(1, 1);
+                        break;
+                    case '5':
+                        ChangeConfidence(1, 1);
+                        break;
+                    case '6':
+                        ChangeConfidence(5, 2);
+                        break;
+                    case '7':
+                        ChangeConfidence(1, 1);
+                        break;
+                    case '8':
+                        ChangeConfidence(-1, -1);
+                        break;
+                    case '9':
+                        ChangeConfidence(-1, 0);
+                        break;
+                }
+                if (chosenDir == '8')
+                    makeEnemy();
+                else
+                    makeFriend();
             }
         }
         else
@@ -81,7 +118,11 @@ public class Talk : MonoBehaviour
         for(int i = 0; i < 3; i++)
         {
             if (bubbleIndex == i)
+            {
                 transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.green;
+                chosenDir = transform.GetChild(i).transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.ToString()[0];
+                Debug.Log(chosenDir);
+            }
             else
                 transform.GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
         }
@@ -113,11 +154,11 @@ public class Talk : MonoBehaviour
     }
     private int GenerateRandom()
     {
-        int randomNumber = Random.Range(0, 10);
+        int randomNumber = Random.Range(0, 9);
 
         while (generatedNumbers.Contains(randomNumber))
         {
-            randomNumber = Random.Range(0, 10);
+            randomNumber = Random.Range(0, 9);
         }
 
         generatedNumbers.Add(randomNumber);
@@ -131,14 +172,23 @@ public class Talk : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(false);
         }
     }
-    private void ChangeConfidence(int maxUp, int currentDown)
+    private void ChangeConfidence(int currentDown, int maxUp)
     {
         PlayerPrefs.SetInt("Confidence", PlayerPrefs.GetInt("Confidence") - currentDown);
         PlayerPrefs.SetInt("maxConfidence", PlayerPrefs.GetInt("maxConfidence") + maxUp);
     }
     private void makeFriend()
     {
-        GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color - new Color(0.25f, 0, 0.25f, 0);
+        GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color - new Color(0.2f, 0, 0.2f, 0);
+
+        PlayerPrefs.SetFloat("Red" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.r);
+        PlayerPrefs.SetFloat("Green" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.g);
+        PlayerPrefs.SetFloat("Blue" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.b);
+    }
+
+    private void makeEnemy()
+    {
+        GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color - new Color(0f, 0.2f, 0.2f, 0);
 
         PlayerPrefs.SetFloat("Red" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.r);
         PlayerPrefs.SetFloat("Green" + SceneManager.GetActiveScene().name + transform.name, GetComponent<SpriteRenderer>().color.g);
