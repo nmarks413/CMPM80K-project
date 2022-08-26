@@ -43,8 +43,11 @@ public class NextScene : MonoBehaviour
                 }
                 break;
             case "Classroom":
-                StartCoroutine(wait("Transition", "School Hallway", 1f));
-                PlayerPrefs.SetString("gameState", "School Hallway2");
+                if (PlayerPrefs.GetInt("TestOver") == 1)
+                {
+                    StartCoroutine(wait("Transition", "School Hallway", 1f));
+                    PlayerPrefs.SetString("gameState", "School Hallway2");
+                }
                 break;
             case "School Hallway2":
                 if (gameObject.name == "maroon_double")
