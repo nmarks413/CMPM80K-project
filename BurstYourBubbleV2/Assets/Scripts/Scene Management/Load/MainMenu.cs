@@ -15,11 +15,10 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
         mainMenu = GameObject.Find("Main").GetComponent<Canvas>();
         optionsMenu = GameObject.Find("OptionsCanvas").GetComponent<Canvas>();
-        //audioSource = GameObject.Find("MenuAudio").GetComponent<AudioSource>();
-
+        DontDestroyOnLoad(GameObject.Find("Main Music").GetComponent<AudioSource>());
         Button startButton = GameObject.Find("Start").GetComponent<Button>();
         Button optionsButton = GameObject.Find("Options").GetComponent<Button>();
         Button exitButton = GameObject.Find("Exit").GetComponent<Button>();
