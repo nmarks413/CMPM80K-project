@@ -6,17 +6,34 @@ using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
-    
+
+    private bool loadingScene;
+
+    private void Start()
+    {
+        loadingScene = false;
+    }
+
+    void Update()
+    {
+        if (PlayerPrefs.GetInt("Confidence") <= 0 && !loadingScene)
+        {
+            StartCoroutine(wait("Transition", "Bedroom", 1f));
+            PlayerPrefs.SetString("gameState", "Home");
+            loadingScene = true;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
         Debug.Log(gameObject.name);
-        
-        switch(PlayerPrefs.GetString("gameState"))
+
+        switch (PlayerPrefs.GetString("gameState"))
         {
             case "Awake":
-                StartCoroutine(wait("Transition","School Hallway",4f));
-                PlayerPrefs.SetString("gameState","School Hallway");
+                StartCoroutine(wait("Transition", "School Hallway", 4f));
+                PlayerPrefs.SetString("gameState", "School Hallway");
                 break;
             case "School Hallway":
                 if (gameObject.name == "Door")
@@ -26,12 +43,12 @@ public class NextScene : MonoBehaviour
                 }
                 break;
             case "Classroom":
-                StartCoroutine(wait("Transition","School Hallway",1f));
+                StartCoroutine(wait("Transition", "School Hallway", 1f));
                 PlayerPrefs.SetString("gameState", "School Hallway2");
                 break;
             case "School Hallway2":
-                if(gameObject.name == "maroon_double")
-                StartCoroutine(wait("Transition", "Lunch", 1f));
+                if (gameObject.name == "maroon_double")
+                    StartCoroutine(wait("Transition", "Lunch", 1f));
                 PlayerPrefs.SetString("gameState", "Lunch");
                 break;
             case "Lunch":
@@ -44,14 +61,10 @@ public class NextScene : MonoBehaviour
                 break;
         }
     }
-    IEnumerator wait(string s1,string s2,float t)
+    IEnumerator wait(string s1, string s2, float t)
     {
         SceneManager.LoadScene(s1, LoadSceneMode.Additive);
         yield return new WaitForSeconds(t);
-        SceneManager.LoadScene(s2,LoadSceneMode.Single);
+        SceneManager.LoadScene(s2, LoadSceneMode.Single);
     }
-    
-    
-
-    
 }

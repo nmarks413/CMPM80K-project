@@ -12,16 +12,26 @@ public class MainMenu : MonoBehaviour
     private Slider volumeSlider;
     private AudioSource audioSource;
     private Text volumeText;
+
+    private GameObject winningTest;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        winningTest = GameObject.Find("Win");
+        winningTest.SetActive(false);
+
         mainMenu = GameObject.Find("Main").GetComponent<Canvas>();
         optionsMenu = GameObject.Find("OptionsCanvas").GetComponent<Canvas>();
-        DontDestroyOnLoad(GameObject.Find("Main Music").GetComponent<AudioSource>());
+        //DontDestroyOnLoad(GameObject.Find("Main Music").GetComponent<AudioSource>());
         Button startButton = GameObject.Find("Start").GetComponent<Button>();
         Button optionsButton = GameObject.Find("Options").GetComponent<Button>();
         Button exitButton = GameObject.Find("Exit").GetComponent<Button>();
+
+        if(PlayerPrefs.GetString("winningStatus") == "You Won")
+        {
+            winningTest.SetActive(true);
+        }
 
         startButton.onClick.AddListener(StartGame);
         optionsButton.onClick.AddListener(openOptions);

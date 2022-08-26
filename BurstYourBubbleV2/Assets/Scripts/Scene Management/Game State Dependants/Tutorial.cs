@@ -10,7 +10,6 @@ public class Tutorial : MonoBehaviour
     private void Start()
     {
         arrowTutorial = GameObject.Find("ArrowTutorial");
-        arrowTutorial.SetActive(false);
         PlayerPrefs.SetInt("Confidence", PlayerPrefs.GetInt("maxConfidence"));
     }
     // Update is called once per frame
