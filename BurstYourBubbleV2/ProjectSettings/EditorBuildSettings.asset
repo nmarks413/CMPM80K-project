@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0589ea6e025f0504b95b53564ad919e8
+  - enabled: 1
     path: Assets/Scenes/Bedroom.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/School Hallway.unity
-    guid: 2e34b80697c5e3f409dedfef486ca37e
-  - enabled: 1
     path: Assets/Scenes/Transition.unity
     guid: 87097bbd53ed6474ba6b40048d1b6458
+  - enabled: 1
+    path: Assets/Scenes/School Hallway.unity
+    guid: 2e34b80697c5e3f409dedfef486ca37e
   - enabled: 1
     path: Assets/Scenes/Lunch.unity
     guid: fff7aab1ceeccb14aa930f1c859bd259

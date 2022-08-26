@@ -94,10 +94,18 @@ public class Talk : MonoBehaviour
                         ChangeConfidence(-1, 0);
                         break;
                 }
-                if (chosenDir == '8')
+                if (chosenDir == '8' || chosenDir == '3')
+                {
                     makeEnemy();
+                }
                 else
                     makeFriend();
+
+                if (PlayerPrefs.GetFloat("Green" + SceneManager.GetActiveScene().name + transform.name) >= 0.9 && PlayerPrefs.GetFloat("Red" + SceneManager.GetActiveScene().name + transform.name) <= 0.3)
+                {
+                    PlayerPrefs.SetString("winningStatus", "You Won");
+                    SceneManager.LoadScene("MainMenu");
+                }
             }
         }
         else
@@ -115,7 +123,7 @@ public class Talk : MonoBehaviour
     }
     private void SelectBubble(int bubbleIndex)
     {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (bubbleIndex == i)
             {
@@ -129,7 +137,7 @@ public class Talk : MonoBehaviour
     }
     private void SpawnBubbles()
     {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
 
             transform.GetChild(i).gameObject.SetActive(true);
